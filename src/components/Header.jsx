@@ -1,14 +1,9 @@
 import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  Grid,
-  Typography,
-  InputBase,
-  Paper,
-  IconButton,
-  Divider,
-} from "@material-ui/core";
+import { Grid, InputBase, Paper, IconButton, Divider } from "@material-ui/core";
 import { MdSearch } from "react-icons/md";
+import styled from "styled-components";
+import Logo from "../images/logo.png";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -49,7 +44,7 @@ const Header = () => {
   return (
     <Grid container alignItems="center" className={classes.margin}>
       <Grid item xs={3}>
-        <Typography>News Aggregator</Typography>
+        <LogoContainer src={Logo} alt="" />
       </Grid>
 
       <Grid item xs={8} sm={6}>
@@ -74,3 +69,7 @@ const Header = () => {
 };
 
 export default Header;
+
+const LogoContainer = styled.img`
+  padding-left: 25px;
+`;

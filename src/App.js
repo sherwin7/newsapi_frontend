@@ -3,6 +3,7 @@ import { Grid } from "@material-ui/core";
 
 import Header from "./components/Header";
 import Sidebar from "./components/Sidenav";
+import NewsComponent from "./components/News";
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
             <Sidebar />
           </Grid>
           <Grid item xs={8}>
-            NEWS
+            <NewsComponent />
           </Grid>
         </Grid>
       </Grid>
