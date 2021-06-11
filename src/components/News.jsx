@@ -33,27 +33,30 @@ const News = () => {
   };
 
   return (
-    <Grid container className={classes.margin} spacing={5}>
-      {newsPg.map((news) => {
-        return (
-          <Grid item key={uuidv4()}>
-            <NewsCard
-              heading={news.heading || ""}
-              source={news.source_name || ""}
-              description={news.description || ""}
-              imageURL={news.imageURL || ""}
-              articleLink={news.articleLink || ""}
-            />
-          </Grid>
-        );
-      })}
+    <div>
+      <Grid container className={classes.margin} spacing={5}>
+        {newsPg.map((news) => {
+          return (
+            <Grid item key={uuidv4()}>
+              <NewsCard
+                heading={news.heading || ""}
+                source={news.source_name || ""}
+                description={news.description || ""}
+                imageURL={news.imageURL || ""}
+                articleLink={news.articleLink || ""}
+              />
+            </Grid>
+          );
+        })}
+      </Grid>
+
       <Pagination
         count={50}
         page={page}
         onChange={handleChange}
         color="primary"
       />
-    </Grid>
+    </div>
   );
 };
 

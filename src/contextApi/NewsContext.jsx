@@ -8,7 +8,7 @@ export const NewsProvider = ({ children }) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/api/newsapi/trending`)
+      .get(`${process.env.REACT_APP_BACKEND_URL}/api/newsapi/trending`)
       .then((response) => {
         const { details } = response.data;
         setNewsList(details);
