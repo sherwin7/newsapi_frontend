@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, InputBase, Paper, IconButton, Divider } from "@material-ui/core";
 import { MdSearch } from "react-icons/md";
 import styled from "styled-components";
+import axios from "axios";
+import { NewsContext } from "../contextApi/NewsContext";
+
 import Logo from "../images/logo.png";
 
 const useStyles = makeStyles((theme) => ({
@@ -31,20 +34,36 @@ const Header = () => {
   const classes = useStyles();
 
   const [searchStr, setSearchStr] = useState("");
+  const [newsList, setNewsList] = useContext(NewsContext);
 
   const handleChange = (e) => {
     setSearchStr(e.target.value);
   };
 
   const handleSearch = () => {
-    console.log(searchStr);
     setSearchStr("");
+
+    axios
+      .get(
+        `${process.env.REACT_APP_BACKEND_URL}/api/newsapi/search?q=${searchStr}`
+      )
+      .then((response) => {
+        const { details } = response.data;
+        setNewsList(details);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
   };
 
   return (
     <Grid container alignItems="center" className={classes.margin}>
       <Grid item xs={3}>
-        <LogoContainer src={Logo} alt="" />
+        <LogoContainer
+          src={Logo}
+          alt=""
+          onClick={() => window.location.reload()}
+        />
       </Grid>
 
       <Grid item xs={8} sm={6}>
@@ -72,4 +91,5 @@ export default Header;
 
 const LogoContainer = styled.img`
   padding-left: 25px;
+  cursor: pointer;
 `;

@@ -1,7 +1,10 @@
+import { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Divider, IconButton, MenuItem } from "@material-ui/core";
 import { MdMenu } from "react-icons/md";
 import { v4 as uuidv4 } from "uuid";
+import { NewsContext } from "../contextApi/NewsContext";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -37,6 +40,22 @@ const Sidenav = () => {
     "Technology",
   ];
 
+  const [newsList, setNewsList] = useContext(NewsContext);
+
+  const updateNewsData = (category) => {
+    axios
+      .get(
+        `${process.env.REACT_APP_BACKEND_URL}/api/newsapi/trending?category=${category}`
+      )
+      .then((response) => {
+        const { details } = response.data;
+        setNewsList(details);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  };
+
   return (
     <Grid container direction="column" className={classes.margin}>
       <Grid container item xs={6} spacing={2} direction="column">
@@ -52,7 +71,13 @@ const Sidenav = () => {
         {category.map((cat) => {
           return (
             <Grid item className={classes.category} key={uuidv4()}>
-              <MenuItem className={classes.catMenu} dense>
+              <MenuItem
+                className={classes.catMenu}
+                dense
+                onClick={() => {
+                  updateNewsData(cat.toLowerCase());
+                }}
+              >
                 {cat}
               </MenuItem>
             </Grid>

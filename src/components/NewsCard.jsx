@@ -1,23 +1,18 @@
 import { Card, CardContent, Grid, Button } from "@material-ui/core";
 import styled from "styled-components";
 import { FiLink } from "react-icons/fi";
+import UnavailableImage from "../images/unavailable-image.jpg";
 
-const NewsCard = ({ heading, source, description, imageURL }) => {
+const NewsCard = ({ heading, source, description, imageURL, articleLink }) => {
   return (
     <Card>
       <Grid container alignItems="center">
-        <Grid item>
+        <Grid item alignContent="space-between">
           <CardContent>
-            <NewsHeading>
-              Manchester City Vs. Chelsea: What You Need To Know About The
-              Champions League Final.
-            </NewsHeading>
-            <NewsSource>Forbes</NewsSource>
-            <p>
-              The English Premier League rivals are set to face off in the
-              showpiece match of European soccer.
-            </p>
-            <a href="https://sherwinp.dev" target="_blank">
+            <NewsHeading>{heading}</NewsHeading>
+            <NewsSource>{source}</NewsSource>
+            <NewsDescription>{description}</NewsDescription>
+            <a href={articleLink} target="_blank" without rel="noreferrer">
               <Button variant="contained" color="primary" endIcon={<FiLink />}>
                 Learn more
               </Button>
@@ -25,10 +20,7 @@ const NewsCard = ({ heading, source, description, imageURL }) => {
           </CardContent>
         </Grid>
         <Grid item>
-          <CardImage
-            src="https://thumbor.forbes.com/thumbor/fit-in/1200x0/filters%3Aformat%28jpg%29/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F60b230aac9ec7d4531564f27%2F0x0.jpg"
-            alt="image.jpeg"
-          />
+          <CardImage src={imageURL || UnavailableImage} alt="image.jpeg" />
         </Grid>
       </Grid>
     </Card>
@@ -52,4 +44,8 @@ const NewsSource = styled.div`
 const CardImage = styled.img`
   max-width: 250px;
   margin-right: 10px;
+`;
+
+const NewsDescription = styled.p`
+  max-width: 700px;
 `;
