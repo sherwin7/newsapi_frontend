@@ -37,7 +37,7 @@ const Header = () => {
   const [newsList, setNewsList] = useContext(NewsContext);
 
   const handleChange = (e) => {
-    setSearchStr(e.target.value);
+    setSearchStr(encodeURIComponent(e.target.value));
   };
 
   const handleSearch = () => {
