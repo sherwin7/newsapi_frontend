@@ -51,7 +51,7 @@ const News = () => {
       </Grid>
 
       <Pagination
-        count={50}
+        count={20}
         page={page}
         onChange={handleChange}
         color="primary"
